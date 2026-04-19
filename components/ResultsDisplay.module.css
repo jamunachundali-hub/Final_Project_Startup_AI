@@ -1,0 +1,329 @@
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.6s ease-out;
+  padding-bottom: 40px;
+}
+
+/* Empty State */
+.emptyState {
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+  gap: 20px;
+}
+
+.emptyIllustration {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulseDisk {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+  opacity: 0.1;
+  border-radius: 50%;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.emptyIcon {
+  color: var(--accent-primary);
+  opacity: 0.4;
+}
+
+/* Prime Card (Verdict) */
+.primeCard {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+.primeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.industryTag {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.primeTitleGrp h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to bottom right, #fff 50%, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.verdictRibbon {
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px -3px rgba(0,0,0,0.2);
+}
+
+.verdictRibbon[data-decision="INVEST"] { background: #10b981; color: #fff; }
+.verdictRibbon[data-decision="WATCH"] { background: #f59e0b; color: #fff; }
+.verdictRibbon[data-decision="PASS"] { background: #ef4444; color: #fff; }
+
+.primeGrid {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 32px;
+  align-items: center;
+}
+
+.verdictReason {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.quickTags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quickTags span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.primeScore {
+  display: flex;
+  justify-content: center;
+}
+
+.scoreRing {
+  width: 140px;
+  height: 140px;
+  border: 8px solid rgba(255,255,255,0.05);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.ringValue {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.ringLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Main Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.analysisModule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.modLabel { color: var(--text-muted); font-size: 0.9rem; }
+.modValue { color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; }
+
+/* SWOT */
+.swotBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swotQuadrant {
+  background: rgba(0,0,0,0.2);
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #fff;
+}
+
+.swotQuadrant[data-q="S"] { border-color: #10b981; }
+.swotQuadrant[data-q="W"] { border-color: #ef4444; }
+
+.swotQuadrant label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.swotQuadrant ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.swotQuadrant li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  padding-left: 12px;
+  position: relative;
+}
+
+.swotQuadrant li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+/* Roadmap */
+.roadmapCompact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.roadItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.roadBullet {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  background: var(--accent-primary);
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.roadItem p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Refined Section */
+.refinedSection {
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,215,0,0.1);
+  background: linear-gradient(145deg, rgba(255,215,0,0.05), transparent);
+}
+
+.refinedHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.goldIcon { color: #facc15; }
+
+.refinedText {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 16px;
+  border-left: 2px solid rgba(255,215,0,0.2);
+}
+
+.recommendationsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.recItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.03);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.recIcon { color: #10b981; }
+.recItem span { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.1); opacity: 0.15; }
+}
+
+@media (max-width: 768px) {
+  .primeGrid {
+    grid-template-columns: 1fr;
+  }
+  .primeScore {
+    order: -1;
+  }
+}
