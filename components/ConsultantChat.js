@@ -5,17 +5,21 @@ import { MessageSquare, Send, Bot, User, Sparkles } from 'lucide-react';
 import styles from './ConsultantChat.module.css';
 
 const ConsultantChat = ({ data }) => {
+  const [persona, setPersona] = useState('advisor');
   const [messages, setMessages] = useState([
     { 
       role: 'assistant', 
       content: data 
-        ? `I have analyzed "${data.idea}". How can I help you refine this business today?`
+        ? `I have analyzed "${data.idea}". I am ready to provide strategic advice. How can I help you today?`
         : "Evaluation data pending. Once you evaluate an idea, I can help you with specific strategies."
     }
   ]);
-  const [input, setInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const scrollRef = useRef(null);
+
+  const personas = [
+    { id: 'advisor', name: 'VC Advisor', icon: Bot, color: '#22d3ee' },
+    { id: 'architect', name: 'Tech Lead', icon: Zap, color: '#fbbf24' },
+    { id: 'hacker', name: 'Growth Hacker', icon: TrendingUp, color: '#10b981' }
+  ];
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -38,7 +42,8 @@ const ConsultantChat = ({ data }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: input,
-          context: data
+          context: data,
+          persona: persona
         }),
       });
 
@@ -59,6 +64,20 @@ const ConsultantChat = ({ data }) => {
           <h2>Consultant Room</h2>
         </div>
         <p>Interactive strategic sparring based on your latest evaluation.</p>
+      </div>
+
+      <div className={styles.personaSelector}>
+        {personas.map(p => (
+          <button 
+            key={p.id}
+            className={`${styles.personaBtn} ${persona === p.id ? styles.activePersona : ''}`}
+            onClick={() => setPersona(p.id)}
+            style={{ '--p-color': p.color }}
+          >
+            <p.icon size={16} />
+            <span>{p.name}</span>
+          </button>
+        ))}
       </div>
 
       <div className={`${styles.chatBox} glass`}>

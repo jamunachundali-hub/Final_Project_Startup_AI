@@ -3,13 +3,13 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
-    const { message, context } = await req.json();
+    const { message, context, persona } = await req.json();
     
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
 
-    const reply = await getConsultantReply(message, context);
+    const reply = await getConsultantReply(message, context, persona);
     
     return NextResponse.json({ reply });
   } catch (error) {

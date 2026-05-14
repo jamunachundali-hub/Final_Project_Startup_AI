@@ -83,6 +83,11 @@
   line-height: 1.4;
 }
 
+.chartSection {
+  padding: 32px;
+  border-radius: 24px;
+}
+
 /* Main Grid */
 .mainGrid {
   display: grid;

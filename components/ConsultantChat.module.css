@@ -36,6 +36,41 @@
   font-size: 0.95rem;
 }
 
+.personaSelector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.personaBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.personaBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.activePersona {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: var(--p-color);
+  color: var(--p-color);
+}
+
 /* Chat UI */
 .chatBox {
   flex: 1;

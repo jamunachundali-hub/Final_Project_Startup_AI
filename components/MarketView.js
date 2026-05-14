@@ -9,9 +9,49 @@ import {
   MapPin, 
   UsersRound,
   ShieldAlert,
-  ArrowRight
+  ArrowRight,
+  BarChart3
 } from 'lucide-react';
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  Cell
+} from 'recharts';
 import styles from './MarketView.module.css';
+
+const MarketChart = ({ data }) => {
+  const chartData = [
+    { name: 'TAM', value: parseFloat(data.tam.replace(/[^0-9.]/g, '')) || 100, color: '#3b82f6' },
+    { name: 'SAM', value: parseFloat(data.sam.replace(/[^0-9.]/g, '')) || 60, color: '#10b981' },
+    { name: 'SOM', value: parseFloat(data.som.replace(/[^0-9.]/g, '')) || 20, color: '#fbbf24' },
+  ];
+
+  return (
+    <div style={{ width: '100%', height: 250, marginTop: '20px' }}>
+      <ResponsiveContainer>
+        <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
+          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+          <YAxis hide />
+          <Tooltip 
+            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+            contentStyle={{ background: '#1e1e2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
+          />
+          <Bar dataKey="value" radius={[8, 8, 0, 0]} barSize={50}>
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} fillOpacity={0.8} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
 
 import EmptyState from './EmptyState';
 
@@ -64,6 +104,14 @@ const MarketView = ({ data }) => {
           <div className={styles.sizeValue}>{market_analysis.som}</div>
           <p>The share of the SAM you can realistically capture in the short term.</p>
         </div>
+      </div>
+      
+      <div className={`${styles.chartSection} glass animate-fadeIn`} style={{ animationDelay: '0.1s' }}>
+        <div className={styles.sectionHeader}>
+          <BarChart3 className={styles.accent} />
+          <h3>Market Sizing Visualization</h3>
+        </div>
+        <MarketChart data={market_analysis} />
       </div>
 
       <div className={styles.mainGrid}>

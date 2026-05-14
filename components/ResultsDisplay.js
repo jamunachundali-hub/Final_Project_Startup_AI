@@ -182,17 +182,26 @@ const ResultsDisplay = ({ data }) => {
           </div>
         </Section>
 
-        {/* Execution */}
-        <Section title="Go-to-Market Strategy" icon={Zap} delay="0.4s">
+        {/* Founder Fit */}
+        <Section title="Founder-Market Fit" icon={Award} delay="0.5s">
+          <div className={styles.analysisModule}>
+            <div className={styles.modRow}>
+              <span className={styles.modLabel}>Fit Score:</span>
+              <span className={styles.modValue}>{founder_fit?.score}/10</span>
+            </div>
+            <p className={styles.modDesc}>{founder_fit?.reason}</p>
+          </div>
+        </Section>
+
+        {/* Validation Roadmap */}
+        <Section title="Validation Roadmap" icon={ClipboardCheck} delay="0.6s">
           <div className={styles.roadmapCompact}>
-            <div className={styles.roadItem}>
-              <div className={styles.roadBullet}>1</div>
-              <p>{execution_plan.week_1_2}</p>
-            </div>
-            <div className={styles.roadItem}>
-              <div className={styles.roadBullet}>2</div>
-              <p>{execution_plan.week_3_4}</p>
-            </div>
+            {validation_plan?.experiments.slice(0, 2).map((exp, i) => (
+              <div key={i} className={styles.roadItem}>
+                <div className={styles.roadBullet}>{i + 1}</div>
+                <p>{exp}</p>
+              </div>
+            ))}
           </div>
         </Section>
       </div>
