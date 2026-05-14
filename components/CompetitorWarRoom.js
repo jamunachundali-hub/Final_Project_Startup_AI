@@ -4,13 +4,15 @@ import React from 'react';
 import { Target, Sword, Zap, ShieldAlert, TrendingUp } from 'lucide-react';
 import styles from './CompetitorWarRoom.module.css';
 
+import EmptyState from './EmptyState';
+
 const CompetitorWarRoom = ({ data }) => {
   if (!data?.competitor_matrix) return (
-    <div className={styles.empty}>
-      <Sword size={48} opacity={0.2} />
-      <h3>Competitor War Room</h3>
-      <p>Analyze your rivals and find your strategic advantage.</p>
-    </div>
+    <EmptyState 
+      icon={Sword}
+      title="Strategic War Room"
+      description="Map the competitive landscape and identify your wedge into the market."
+    />
   );
 
   return (

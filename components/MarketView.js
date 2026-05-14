@@ -13,15 +13,16 @@ import {
 } from 'lucide-react';
 import styles from './MarketView.module.css';
 
+import EmptyState from './EmptyState';
+
 const MarketView = ({ data }) => {
   if (!data || !data.market_analysis) {
     return (
-      <div className={styles.emptyState}>
-        <div className={styles.pulseDisk}></div>
-        <Globe size={48} className={styles.emptyIcon} />
-        <h3>Data Pending Analysis</h3>
-        <p>Run a startup evaluation to unlock detailed market research and sizing.</p>
-      </div>
+      <EmptyState 
+        icon={Globe}
+        title="Market Research Pending"
+        description="Run a startup evaluation to unlock detailed TAM/SAM/SOM sizing and audience personas."
+      />
     );
   }
 

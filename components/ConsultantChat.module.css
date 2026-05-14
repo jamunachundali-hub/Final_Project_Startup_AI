@@ -212,6 +212,21 @@
   color: #22d3ee;
 }
 
+.contextBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(34, 211, 238, 0.05);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.bannerIcon {
+  color: #22d3ee;
+}
+
 @keyframes bounce {
   from { transform: translateY(0); opacity: 0.5; }
   to { transform: translateY(-4px); opacity: 1; }

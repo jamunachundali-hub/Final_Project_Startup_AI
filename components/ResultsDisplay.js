@@ -35,9 +35,34 @@ const ScoreBar = ({ label, score, color }) => (
   </div>
 );
 
+const AnimatedCounter = ({ value }) => {
+  const [count, setCount] = React.useState(0);
+  
+  React.useEffect(() => {
+    let start = 0;
+    const end = parseInt(value);
+    if (start === end) return;
+    
+    let timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start === end) clearInterval(timer);
+    }, 50);
+    
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return <>{count}</>;
+};
+
 const Section = ({ title, icon: Icon, children, delay = '0s' }) => (
   <div className={`${styles.card} glass animate-fadeIn`} style={{ animationDelay: delay }}>
-    <h3><Icon size={20} className={styles.cardIcon} /> {title}</h3>
+    <div className={styles.cardHeader}>
+      <div className={styles.iconCircle}>
+        <Icon size={18} />
+      </div>
+      <h3>{title}</h3>
+    </div>
     <div className={styles.cardContent}>
       {children}
     </div>
@@ -99,7 +124,7 @@ const ResultsDisplay = ({ data }) => {
           </div>
           <div className={styles.primeScore}>
             <div className={styles.scoreRing}>
-              <div className={styles.ringValue}>{scores.overall}</div>
+              <div className={styles.ringValue}><AnimatedCounter value={scores.overall} /></div>
               <div className={styles.ringLabel}>Health Score</div>
             </div>
           </div>

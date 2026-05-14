@@ -87,7 +87,7 @@ export default function Home() {
         />
       }
     >
-      <div className={styles.mainContent}>
+      <div className={`${styles.mainContent} animate-fadeIn`} key={activeTab}>
         {activeTab === 'evaluator' ? (
           <div className={styles.dashboardGrid}>
             <div className={styles.formCol}>

@@ -169,6 +169,60 @@
   box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
 }
 
+.colorLabels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.labelItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.typoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.typoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.typoLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+.previewH1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.previewP {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
 .cardInfo {
   font-size: 0.8rem;
   color: var(--text-tertiary);

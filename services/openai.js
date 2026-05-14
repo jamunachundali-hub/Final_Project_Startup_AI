@@ -5,11 +5,16 @@ const openai = new OpenAI({
 });
 
 export const evaluateStartup = async (data) => {
-  const { idea, targetMarket, businessModel, stage, founderBackground } = data;
+  const { idea, targetMarket, businessModel, stage, founderBackground, fileContent, fileName } = data;
+
+  const fileSection = fileContent
+    ? `\n    📎 Uploaded Document: ${fileName || 'Document'}\n    Document Content:\n    ${fileContent}\n`
+    : '';
 
   const prompt = `
     You are an expert startup analyst, venture capitalist, and product strategist.
     Your task is to evaluate a startup idea and return a complete, structured business analysis.
+    ${fileContent ? 'The user has also uploaded a supporting document — use its content to enrich your analysis.' : ''}
 
     ---
     ## 📥 INPUT
@@ -17,7 +22,7 @@ export const evaluateStartup = async (data) => {
     Target Market: ${targetMarket || 'Not specified'}
     Business Model: ${businessModel || 'Not specified'}
     Stage: ${stage || 'Idea'}
-    Founder Background: ${founderBackground || 'Not specified'}
+    Founder Background: ${founderBackground || 'Not specified'}${fileSection}
 
     ---
     ## 🧠 INSTRUCTIONS

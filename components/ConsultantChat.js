@@ -62,6 +62,13 @@ const ConsultantChat = ({ data }) => {
       </div>
 
       <div className={`${styles.chatBox} glass`}>
+        {data && (
+          <div className={styles.contextBanner}>
+            <Sparkles size={14} className={styles.bannerIcon} />
+            <span>Consulting on: <strong>{data.idea}</strong> ({data.classification?.industry})</span>
+          </div>
+        )}
+
         <div className={styles.messages} ref={scrollRef}>
           {messages.map((m, i) => (
             <div key={i} className={`${styles.message} ${styles[m.role]}`}>
@@ -83,10 +90,22 @@ const ConsultantChat = ({ data }) => {
           )}
         </div>
 
+        <div className={styles.suggestions}>
+          <button onClick={() => setInput("What are the best marketing channels for this?")} disabled={!data}>
+            Marketing
+          </button>
+          <button onClick={() => setInput("How should I price this for enterprise?")} disabled={!data}>
+            Pricing
+          </button>
+          <button onClick={() => setInput("What would be a good MVP scope?")} disabled={!data}>
+            MVP
+          </button>
+        </div>
+
         <form className={styles.inputArea} onSubmit={handleSend}>
           <input 
             type="text" 
-            placeholder={data ? "Ask a follow-up question..." : "Evaluate an idea first..."}
+            placeholder={data ? "Ask follow-up..." : "Evaluate an idea first..."}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={!data || isTyping}
@@ -95,12 +114,6 @@ const ConsultantChat = ({ data }) => {
             <Send size={18} />
           </button>
         </form>
-
-        <div className={styles.suggestions}>
-          <button onClick={() => setInput("What are the best marketing channels for this?")} disabled={!data}>Marketing</button>
-          <button onClick={() => setInput("How should I price this for enterprise?")} disabled={!data}>Pricing</button>
-          <button onClick={() => setInput("What would be a good MVP scope?")} disabled={!data}>MVP</button>
-        </div>
       </div>
     </div>
   );

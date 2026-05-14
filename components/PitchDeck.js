@@ -4,14 +4,67 @@ import React from 'react';
 import { Presentation, Image as ImageIcon, Layout as LayoutIcon, ChevronRight } from 'lucide-react';
 import styles from './PitchDeck.module.css';
 
+import EmptyState from './EmptyState';
+
 const PitchDeck = ({ data }) => {
+  const [presentMode, setPresentMode] = React.useState(false);
+  const [activeSlide, setActiveSlide] = React.useState(0);
+
   if (!data?.pitch_deck) return (
-    <div className={styles.empty}>
-      <Presentation size={48} opacity={0.2} />
-      <h3>Pitch Deck Outline</h3>
-      <p>Evaluate an idea to generate a structured slide deck.</p>
-    </div>
+    <EmptyState 
+      icon={Presentation}
+      title="Slide Architect Ready"
+      description="Evaluate your vision to generate a professional, investor-ready slide deck outline."
+    />
   );
+
+  const slides = data.pitch_deck;
+
+  if (presentMode) {
+    return (
+      <div className={styles.presentOverlay}>
+        <div className={styles.presentContent}>
+          <button className={styles.closeBtn} onClick={() => setPresentMode(false)}>✕ Close</button>
+          
+          <div className={`${styles.bigSlide} glass`}>
+            <div className={styles.bigSlideHeader}>
+              <span className={styles.bigSlideNum}>Slide {activeSlide + 1} of {slides.length}</span>
+              <h2>{slides[activeSlide].title}</h2>
+            </div>
+            <div className={styles.bigSlideBody}>
+              <p>{slides[activeSlide].content}</p>
+              {slides[activeSlide].visual_suggestion && (
+                <div className={styles.bigVisual}>
+                  <ImageIcon size={20} />
+                  <span>Visual Concept: {slides[activeSlide].visual_suggestion}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.presentNav}>
+            <button 
+              disabled={activeSlide === 0} 
+              onClick={() => setActiveSlide(prev => prev - 1)}
+            >
+              Previous
+            </button>
+            <div className={styles.navDots}>
+              {slides.map((_, i) => (
+                <div key={i} className={`${styles.dot} ${i === activeSlide ? styles.dotActive : ''}`} />
+              ))}
+            </div>
+            <button 
+              disabled={activeSlide === slides.length - 1} 
+              onClick={() => setActiveSlide(prev => prev + 1)}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -20,12 +73,18 @@ const PitchDeck = ({ data }) => {
           <Presentation className={styles.icon} />
           <h2>Pitch Deck Architect</h2>
         </div>
-        <p>A slide-by-slide structure to help you win over investors.</p>
+        <div className={styles.headerActions}>
+          <button className={styles.presentBtn} onClick={() => { setActiveSlide(0); setPresentMode(true); }}>
+            <Presentation size={16} />
+            Presentation Mode
+          </button>
+        </div>
       </div>
+      <p className={styles.subtitle}>A professional slide-by-slide structure to win over investors.</p>
 
       <div className={styles.deck}>
-        {data.pitch_deck.map((slide, index) => (
-          <div key={index} className={`${styles.slideCard} glass`}>
+        {slides.map((slide, index) => (
+          <div key={index} className={`${styles.slideCard} glass`} onClick={() => { setActiveSlide(index); setPresentMode(true); }}>
             <div className={styles.slideHeader}>
               <span className={styles.slideNumber}>Slide {slide.slide || index + 1}</span>
               <h3 className={styles.slideTitle}>{slide.title}</h3>
@@ -33,13 +92,6 @@ const PitchDeck = ({ data }) => {
             
             <div className={styles.slideBody}>
               <p className={styles.slideContent}>{slide.content}</p>
-              
-              {slide.visual_suggestion && (
-                <div className={styles.visualSuggestion}>
-                  <ImageIcon size={14} />
-                  <span>Visual: {slide.visual_suggestion}</span>
-                </div>
-              )}
             </div>
 
             <div className={styles.slideFooter}>
