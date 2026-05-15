@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 export async function POST(req) {
   try {
     const formData = await req.formData();
@@ -14,7 +16,7 @@ export async function POST(req) {
     let extractedText = '';
 
     if (fileName.endsWith('.pdf')) {
-      const pdfParse = (await import('pdf-parse/lib/pdf-parse.js')).default;
+      const pdfParse = (await import('pdf-parse')).default;
       const pdfData = await pdfParse(buffer);
       extractedText = pdfData.text;
     } else if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
