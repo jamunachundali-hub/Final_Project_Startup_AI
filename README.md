@@ -7,7 +7,7 @@ Below are the primary links for this final project submission:
 | Resource | URL / Link | Status | Description |
 | :--- | :--- | :--- | :--- |
 | **GitHub Repository** | [github.com/jamunachundali-hub/Final_Project_Startup_AI](https://github.com/jamunachundali-hub/Final_Project_Startup_AI) | 🟢 Public | Complete source code, git history, and documentation |
-| **Live Vercel Production** | [final-project-startup-ai.vercel.app](https://final-project-startup-ai.vercel.app) | 🟢 Active | Live web application deployment |
+| **Live Vercel Production** | [startup-ai-app.vercel.app](https://startup-ai-app.vercel.app) | 🟢 Active | Live web application deployment |
 | **Local Dev Server** | [http://localhost:3001](http://localhost:3001) | 🖥️ Local | Run locally via `npm run dev` |
 
 ---
